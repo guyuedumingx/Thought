@@ -53,6 +53,7 @@ password
 
 ```
 项目截至时间(活动时长): activeTime(ddl) String
+房间号: 6位数,可分享 
 项目主题(名):  homeName String
 项目是否公开:   isPublic boolean
 项目等级:   rank int 
@@ -64,18 +65,23 @@ password
 返回项目id(UUID)   
 ```
 
+#### 进入房间  
+
+```
+房间号: 
+```
+
 #### 销毁项目  
 
 ```
-	项目id  
+项目id  
+销毁权限:  只有创建项目的人编辑  
 ```
 返回  
 
 ```
 isSuccess: boolean  
 ```
-
-#### 时间到自动销毁项目  
 
 #### 创建根节点 
 
@@ -84,6 +90,7 @@ isSuccess: boolean
 根节点主题: theme  
 根节点详细内容: content long  
 字节点数组: children [childId]    
+编辑权限:  只有创建项目的人编辑  
 ```
 
 返回  
@@ -95,7 +102,7 @@ isSuccess: boolean
 
 **创建**   
 ```
-节点id:  UUID  
+父节点id:  UUID  
 节点作者: email(cookie)  
 主题: theme  
 详细内容: content  
@@ -104,12 +111,19 @@ isSuccess: boolean
 节点可被他人编辑:  edit boolean  
 最后一次修改节点的人: email  
 最后一次修改节点的时间:  date String 
+```
 
+返回值  
+
+```
+节点id int   
+if id = -1 : 失败  
 ```
 
 **修改**  
 ```
 节点id  
+
 用户id: email(cookie)  
 ```
 如果该操作者是节点作者,则可修改  
@@ -144,6 +158,14 @@ isSuccess: boolean
 }
 ```
 
+#### 搜索  
+
+```
+
+```
+
+#### 项目成员列表  
+
 #### 节点点赞 
 
 ### TO-DO  
@@ -152,3 +174,4 @@ isSuccess: boolean
 #### 粉丝数  
 #### 公有项目收藏  
 
+[蓝湖](https://lanhuapp.com/)
