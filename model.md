@@ -55,6 +55,11 @@
 6. create_time   
 	- date(时间戳)  
 7. deadline  
+	- date  
+8. contributors  
+	- String  
+9. head  
+	- node_id  
 
 **Node**  
 
