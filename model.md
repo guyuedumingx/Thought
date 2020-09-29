@@ -49,11 +49,12 @@
 3. public  
 	- boolean  
 4. project_rank  
-	- char  
+	- int    
 5. user_id  (author)  
 	- int   
 6. create_time   
 	- date(时间戳)  
+7. deadline  
 
 **Node**  
 
