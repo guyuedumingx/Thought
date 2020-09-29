@@ -60,6 +60,8 @@
 	- String  
 9. head  
 	- node_id  
+10. introduction  
+	- String  
 
 **Node**  
 
