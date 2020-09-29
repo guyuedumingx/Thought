@@ -75,6 +75,8 @@
 	- date 
 8. last_edit_time  
 	- date  
+9. nameless  
+	- boolean  
 
 > `children`以逗号分隔   
 
@@ -94,7 +96,11 @@ UserController
 UserOpratorController  
 	- post chPassword  
 	- get star  
-	
+
+AvatarController  
+	- post setAvatar  
+	- get getAvatar	  
+
 NodeController  
 	- post newNode  
 	- get getNode  
