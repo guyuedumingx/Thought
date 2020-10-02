@@ -29,7 +29,7 @@ create database if not exists ms character set utf8;
 
 ```mysql
 create table t_user (
-	id int primary key,
+	id int primary key auto_increment,
 	user_name varchar(20) not null,
 	password long not null,
 	user_avatar long default 'default.png',
@@ -93,7 +93,7 @@ create table t_recent_project(
 
 ```mysql
 create table t_project (
-	id int primary key,
+	id int primary key auto_increment,
 	project_name varchar(64) not null,
 	public boolean not null,
 	project_rank int not null default 0,
@@ -144,7 +144,7 @@ create table t_contributor(
 
 ```mysql  
 create table t_node(
-	id int primary key,
+	id int primary key auto_increment,
 	author_id int not null,
 	parent_id int,
 	theme varchar(64) not null,
@@ -183,6 +183,6 @@ create table t_edit(
 	user_id int not null,
 	node_id int not null,
 	edit_type varchar(16) not null,
-	edit time timestamp
+	edit_time timestamp
 );
 ```
