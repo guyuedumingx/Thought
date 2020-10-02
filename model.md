@@ -28,12 +28,12 @@ create database if not exists ms character set utf8;
 	- int 可以是null   
 
 ```mysql
-create table user (
+create table t_user (
 	id int primary key,
-	name varchar(20) not null,
+	user_name varchar(20) not null,
 	password long not null,
-	userAvatar long default 'default.png',
-	userSignature varchar(32) default '这家伙很懒,什么也没留下!',
+	user_avatar long default 'default.png',
+	user_signature varchar(32) default '这家伙很懒,什么也没留下!',
 	exp int default 0,
 	token int 
 );
@@ -49,7 +49,7 @@ create table user (
 | 单元格      | 单元格       |
 
 ```mysql
-create table follow (
+create table t_follow (
 	follower_id int not null,
 	following_id int not null
 );
@@ -63,7 +63,7 @@ create table follow (
 | 单元格  | 单元格     |
 
 ```mysql
-create table recent_project(
+create table t_recent_project(
 	user_id int not null,
 	project_id int null 
 );
@@ -92,16 +92,16 @@ create table recent_project(
 	- String  
 
 ```mysql
-create table project (
+create table t_project (
 	id int primary key,
-	name varchar(64) not null,
-	isPublic boolean not null,
-	rank int not null default 0,
-	author int not null,
+	project_name varchar(64) not null,
+	public boolean not null,
+	project_rank int not null default 0,
+	author_id int not null,
 	introduction long,
-	headNodeId int not null,
-	createTime date,
-	ddl date
+	head_id int not null,
+	create_time date,
+	deadline date
 );
 ```
 
@@ -112,7 +112,7 @@ create table project (
 
 
 ```mysql  
-create table contributor(
+create table t_contributor(
 	project_id int not null,
 	contributor_id int not null
 );
@@ -143,16 +143,16 @@ create table contributor(
 > `children`以逗号分隔   
 
 ```mysql  
-create table node(
+create table t_node(
 	id int primary key,
-	author int not null,
+	author_id int not null,
 	parent_id int,
 	theme varchar(64) not null,
 	content long not null,
 	editable boolean not null,
 	nameless boolean not null,
-	lastEditId int not null,
-	lastEditTime timestamp
+	last_edit_id int not null,
+	last_edit_time timestamp
 );
 ```
 
@@ -164,8 +164,25 @@ create table node(
 |  单元格 |  单元格 |
 
 ```mysql
-create table star(
+create table t_star(
 	user_id int not null,
 	node_id int not null
+);
+```
+*Recent_Edit*    
+
+| user_id | node_id | edit_type | edit_time |
+|---------|---------|-----------|-----------|
+| 单元格  | 单元格  | insert    | 单元格    |
+| 单元格  | 单元格  | update    | 单元格    |
+| 单元格  | 单元格  | delete    | 单元格    |
+
+
+```mysql  
+create table t_edit(
+	user_id int not null,
+	node_id int not null,
+	edit_type varchar(16) not null,
+	edit time timestamp
 );
 ```
