@@ -1,5 +1,4 @@
 #### Object  
-
 ```mysql
 create database if not exists ms character set utf8;
 ```
@@ -25,17 +24,19 @@ create database if not exists ms character set utf8;
 9. recentProject (最近浏览过的项目)  
 	- String 可以是null  
 10. token (单独一张表)  (设备码)   
-	- int 可以是null   
+	-  可以是null   
+11. email  
 
 ```mysql
 create table t_user (
 	id int primary key auto_increment,
 	user_name varchar(20) not null,
+	user_email varchar(64) not null unique,
 	password long not null,
-	user_avatar long default 'default.png',
+	user_avatar long ,
 	user_signature varchar(32) default '这家伙很懒,什么也没留下!',
 	exp int default 0,
-	token int 
+	token varchar(32)
 );
 ```
 
@@ -51,7 +52,8 @@ create table t_user (
 ```mysql
 create table t_follow (
 	follower_id int not null,
-	following_id int not null
+	following_id int not null,
+	UNIQUE KEY(follower_id, following_id)
 );
 ```
 
@@ -65,7 +67,8 @@ create table t_follow (
 ```mysql
 create table t_recent_project(
 	user_id int not null,
-	project_id int null 
+	project_id int null,
+	UNIQUE KEY(user_id, project_id)
 );
 ```
 **Project**    
@@ -100,8 +103,8 @@ create table t_project (
 	author_id int not null,
 	introduction long,
 	head_id int not null,
-	create_time date,
-	deadline date
+	create_time varchar(64),
+	deadline varchar(64)
 );
 ```
 
@@ -114,7 +117,8 @@ create table t_project (
 ```mysql  
 create table t_contributor(
 	project_id int not null,
-	contributor_id int not null
+	contributor_id int not null,
+	UNIQUE KEY(project_id, contributor_id)
 );
 ```
 **Node**  
@@ -139,6 +143,8 @@ create table t_contributor(
 	- date  
 9. nameless (是否匿名) 
 	- boolean  
+10. project_id  
+	- 节点所属的项目id  
 
 > `children`以逗号分隔   
 
@@ -146,13 +152,14 @@ create table t_contributor(
 create table t_node(
 	id int primary key auto_increment,
 	author_id int not null,
+	project_id int not null,
 	parent_id int,
 	theme varchar(64) not null,
 	content long not null,
-	editable boolean not null,
+	banAppend boolean not null,
 	nameless boolean not null,
 	last_edit_id int not null,
-	last_edit_time timestamp
+	last_edit_time varchar(32)
 );
 ```
 
@@ -166,7 +173,8 @@ create table t_node(
 ```mysql
 create table t_star(
 	user_id int not null,
-	node_id int not null
+	node_id int not null,
+	UNIQUE KEY(user_id, node_id)
 );
 ```
 *Recent_Edit*    
@@ -183,6 +191,6 @@ create table t_edit(
 	user_id int not null,
 	node_id int not null,
 	edit_type varchar(16) not null,
-	edit_time timestamp
+	edit_time varchar(32)
 );
 ```
